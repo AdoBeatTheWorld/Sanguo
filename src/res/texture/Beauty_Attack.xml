@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:05a2dc3893cf4962c8cbadda5a761797$ -->
+<TextureAtlas imagePath="Beauty_Attack.png">
+    <SubTexture name="sprite 85_0001" x="156" y="282" width="64" height="84" frameX="-32" frameY="-6" frameWidth="120" frameHeight="100"/>
+    <SubTexture name="sprite 85_0002" x="156" y="190" width="68" height="90" frameX="-33" frameY="-2" frameWidth="120" frameHeight="100"/>
+    <SubTexture name="sprite 85_0003" x="82" y="190" width="72" height="94" frameX="-34" frameY="-1" frameWidth="120" frameHeight="100"/>
+    <SubTexture name="sprite 85_0004" x="2" y="190" width="78" height="96" frameX="-33" frameY="-1" frameWidth="120" frameHeight="100"/>
+    <SubTexture name="sprite 85_0005" x="2" y="98" width="94" height="90" frameX="-19" frameY="-8" frameWidth="120" frameHeight="100"/>
+    <SubTexture name="sprite 85_0006" x="120" y="96" width="108" height="92" frameX="-6" frameY="-7" frameWidth="120" frameHeight="100"/>
+    <SubTexture name="sprite 85_0007" x="120" y="2" width="116" height="92" frameX="0" frameY="-7" frameWidth="120" frameHeight="100"/>
+    <SubTexture name="sprite 85_0008" x="2" y="2" width="116" height="94" frameX="0" frameY="-6" frameWidth="120" frameHeight="100"/>
+</TextureAtlas>

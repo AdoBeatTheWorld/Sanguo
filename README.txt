@@ -1,0 +1,3 @@
+AIR Mobile develop practice...
+See also:
+http://www.cnblogs.com/adoontheway/
