@@ -23,23 +23,34 @@ package com.ado.objects
 		
 		private var antlas:TextureAtlas;
 		
-		private var walkMc:MovieClip;
-		private var breakMc:MovieClip;
-		private var attackMc:MovieClip;
+		private var mc:MovieClip;
+		
+		//当前加载的的状态
+		private var currentLoading:String;
+		//当前键值
+		private var currentKey:String;
+		
+		private var texture:Texture;
+		private var xml:XML;
+	
 		public function BaseCharacter() 
 		{
 			addEventListener(Event.ADDED_TO_STAGE, onAdded);
+			
 		}
-		private function onAdded(e:Event):void
+		
+		/**
+		 * 通过传入现成的数据进行显示
+		 * */
+		public function displayByData(config:XML, texture:Texture,status:String):void
+		{
+			
+		}
+	
+		private function onAdded(e:starling.events.Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onAdded);
-			antlas = new TextureAtlas(Texture.fromBitmap(new Res.Beauty as Bitmap), XML(new Res.Beauty_Config));
-			breakMc = new MovieClip(antlas.getTextures("sprite 44"), 24);
-			Starling.juggler.add(breakMc);
-			breakMc.play();
-			breakMc.x = breakMc.width >> 1;
-			breakMc.y = -breakMc.height;
-			addChild(breakMc);
+			setStatus(RoleState.BREAK_STATE);
 		}
 		/** 
 		 * 
@@ -49,28 +60,37 @@ package com.ado.objects
 			if (value == status) return;
 			
 			status = value;
-			
-			breakMc.dispose();
-				removeChild(breakMc);
+			if(mc)	mc.dispose();
+			removeChild(mc);
 			if (value == RoleState.BREAK_STATE)
 			{
 				antlas = new TextureAtlas(Texture.fromBitmap(new Res.Beauty as Bitmap), XML(new Res.Beauty_Config));
-				breakMc = new MovieClip(antlas.getTextures("sprite 44"), 24);
+				mc = new MovieClip(antlas.getTextures("sprite 44"), 24);
+				mc.loop = true;
 			}else if (value == RoleState.ATTACK_STATE)
 			{
-				breakMc.dispose();
 				antlas = new TextureAtlas(Texture.fromBitmap(new Res.Beauty_Attack as Bitmap), XML(new Res.Beauty_Attack_Config));
-				breakMc = new MovieClip(antlas.getTextures("sprite 85"), 24);
+				mc = new MovieClip(antlas.getTextures("sprite 85"), 24);
+				mc.loop = false;
+				stage.addEventListener(Event.ENTER_FRAME, onEnter);
 			}else if (value == RoleState.WALK_STATE)
 			{
-				breakMc.dispose();
 				antlas = new TextureAtlas(Texture.fromBitmap(new Res.Beauty_Walk as Bitmap), XML(new Res.Beauty_Walk_Config));
-				breakMc = new MovieClip(antlas.getTextures("sprite 73"), 24);
+				mc = new MovieClip(antlas.getTextures("sprite 73"), 24);
+				mc.loop = true;
 			}
-			breakMc.x = -breakMc.width >> 1;
-			breakMc.y - breakMc.height;
-			addChild(breakMc);
-			Starling.juggler.add(breakMc);
+			mc.x = -mc.width >> 1;// + (status == RoleState.ATTACK_STATE ? 5 : 0);
+			mc.y - mc.height;// + (status == RoleState.ATTACK_STATE ? 5 : 0);
+			addChild(mc);
+			Starling.juggler.add(mc);
+		}
+		private function onEnter(e:Event):void
+		{
+			if (mc.isComplete)
+			{
+				stage.removeEventListener(Event.ENTER_FRAME, onEnter);
+				setStatus(RoleState.BREAK_STATE);
+			}
 		}
 		public function goto(_tx:Number,_ty:Number):void
 		{

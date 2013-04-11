@@ -62,6 +62,8 @@ package com.ado.res
 			}
 			return null;
 		}
+		
+		public static var resMap:Dictionary = new Dictionary();
 	}
 
 }
