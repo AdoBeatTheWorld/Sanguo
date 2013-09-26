@@ -4,6 +4,10 @@ package com.ado.main
 	import com.ado.res.Res;
 	import com.ado.res.RoleState;
 	import com.greensock.TweenLite;
+	
+	import map.MapRender;
+	import map.CharacterRender;
+	
 	import flash.display.Bitmap;
 	import flash.ui.Keyboard;
 	import starling.core.Starling;
@@ -24,30 +28,25 @@ package com.ado.main
 	 */
 	public class GameMain extends Sprite 
 	{
-		private var role:BaseCharacter;
-		private var map:Image;
-		private var farSight:Image;
+		
 		public function GameMain() 
 		{
 			addEventListener(Event.ADDED_TO_STAGE, onAdded);
 			Res.initAtlas();
-			role = new BaseCharacter;
 		}
+		
 		private function onAdded(e:Event):void
 		{
-			farSight = new Image(Texture.fromBitmap(Bitmap(new Res.FAR)));
-			map = new Image(Texture.fromBitmap(Bitmap(new Res.BG)));
-			addChild(map);
-			
-			addChild(role);
-			role.x = stage.stageWidth - role.width >> 1;
-			role.y = stage.stageHeight - role.height >> 1;
+			MapRender.getInstance().initRoot( this );
+			CharacterRender.getInstance().initRoot( this );
 			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKey);
 			stage.addEventListener(TouchEvent.TOUCH, onTouched);
 		}
+		
 		private function onKey(e:KeyboardEvent):void
 		{
+			/**
 			trace(e.keyCode);
 			switch(e.keyCode)
 			{
@@ -62,7 +61,7 @@ package com.ado.main
 					break;
 				default:
 					break;
-			}
+			}*/
 		}
 		private var targetX:Number;
 		private var targetY:Number;
@@ -71,16 +70,22 @@ package com.ado.main
 			var touch:Touch = e.getTouch(stage, TouchPhase.ENDED);
 			if (touch)
 			{
-				trace("Don't touch me..");
 				targetX = touch.globalX;
 				targetY = touch.globalY;
+				/**
 				var dx:Number = role.x - targetX;
 				var dy:Number = role.y - targetY;
 				var dist:Number = Math.sqrt(dx * dx + dy * dy);
-				var time:int = dist / 20;
+				var time:int = dist / 40;
 				role.setStatus(RoleState.WALK_STATE);
-				TweenLite.to(role, time, {x:targetX, y:targetY } );
+				role.direction = dx;
+				TweenLite.to(role, time, {x:targetX, y:targetY, onComplete:onCom } );*/
 			}
+		}
+		
+		private function onCom():void
+		{
+			//role.setStatus(RoleState.BREAK_STATE);
 		}
 	}
 

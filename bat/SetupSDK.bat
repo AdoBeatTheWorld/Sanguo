@@ -1,10 +1,10 @@
 :user_configuration
 
 :: Path to Flex SDK
-set FLEX_SDK=D:\Adobe\4.6.0
+set FLEX_SDK=D:\Program Files\Adobe\Adobe Flash Builder 4.7 (64 Bit)\sdks\4.6.0-3.8
 
 :: Path to Android SDK
-set ANDROID_SDK=D:\Program Files\FlashDevelop\Tools\android
+set ANDROID_SDK=F:\XunleiDownload\adt-bundle-windows-x86_64-20130729\sdk
 
 
 :validation

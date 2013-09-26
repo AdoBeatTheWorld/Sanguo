@@ -16,7 +16,7 @@ goto desktop
 
 ::set SCREEN_SIZE=NexusOne
 ::set SCREEN_SIZE=iPhoneRetina
-set SCREEN_SIZE=WVGA
+set SCREEN_SIZE=NexusOne
 
 :desktop-run
 echo.

@@ -32,7 +32,7 @@ package com.ado.objects
 		
 		private var texture:Texture;
 		private var xml:XML;
-	
+		private var _direction:int = 1;
 		public function BaseCharacter() 
 		{
 			addEventListener(Event.ADDED_TO_STAGE, onAdded);
@@ -92,9 +92,19 @@ package com.ado.objects
 				setStatus(RoleState.BREAK_STATE);
 			}
 		}
-		public function goto(_tx:Number,_ty:Number):void
+		
+		public function set direction( value : int ):void
 		{
-			
+			if ( value * _direction < 0)
+			{
+				_direction = value;
+				this.scaleX = value > 0 ? 1 : -1;
+			}
+		}
+		
+		public function get direction():int
+		{
+			return _direction;
 		}
 	}
 
